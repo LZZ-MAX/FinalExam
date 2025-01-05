@@ -4,6 +4,7 @@ from tkinter import ttk, messagebox, scrolledtext
 from selenium import webdriver
 from selenium.webdriver.edge.service import Service
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import WebDriverException
 
 PATH = "C:/Users/USER/Desktop/FinalExam/FinalExam/msedgedriver.exe"
 
@@ -70,6 +71,11 @@ def scrape_and_display(url_entry, text_area):
 
     except Exception as e:
         messagebox.showerror("錯誤", f"發生錯誤：{e}")
+
+    # 處理無法連接或瀏覽器啟動失敗
+    except WebDriverException as we:
+        text_area.delete(1.0, tk.END)
+        messagebox.showerror("無法連接", f"無法連接到指定的 URL，請檢查您的網路或 URL 是否正確。\n\n詳細資訊: {we}")
 
     driver.quit()
 
