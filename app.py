@@ -36,6 +36,7 @@ def insert_title(cname):
 # 清空資料表
 def clear_table():
     cursor.execute('DELETE FROM titles')
+    cursor.execute('DELETE FROM sqlite_sequence WHERE name="titles"')
     conn.commit()
 
 # 爬取並顯示內容
